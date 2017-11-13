@@ -2,7 +2,7 @@
 [![Download](https://api.bintray.com/packages/kkorolyov/groovy/full-doc/images/download.svg) ](https://bintray.com/kkorolyov/groovy/full-doc/_latestVersion)
 
 # FullDoc
-Adds a task to bundle documentation of all projects into a single output directory.
+Adds a Gradle task to bundle documentation of all projects into a single output directory.
 
 ## Usage
 ```groovy

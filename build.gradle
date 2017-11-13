@@ -6,6 +6,7 @@ plugins {
 
 group 'dev.kkorolyov'
 version 1.0
+description "Gradle task which bundles documentation of all projects into a single output directory"
 
 dependencies {
 	implementation(
