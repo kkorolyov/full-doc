@@ -1,0 +1,54 @@
+plugins {
+	id 'groovy'
+	id 'maven-publish'
+	id 'com.jfrog.bintray' version '1.7.3'
+}
+
+group 'dev.kkorolyov'
+version 1.0
+
+dependencies {
+	implementation(
+			gradleApi(),
+			localGroovy()
+	)
+}
+
+// Artifacts
+task sourceJar(type: Jar) {
+	classifier = 'source'
+	from sourceSets.main.allJava
+}
+task javadocJar(type: Jar) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+// Maven publish
+publishing {
+	publications {
+		fullDoc(MavenPublication) {
+			from components.java
+
+			artifact sourceJar
+			artifact javadocJar
+		}
+	}
+}
+// Bintray upload
+afterEvaluate {
+	bintray {
+		user = System.getenv('BINTRAY_USER')
+		key = System.getenv('BINTRAY_KEY')
+		publications = ['fullDoc']
+		pkg {
+			repo = 'groovy'
+			name = project.name
+			licenses = ['BSD 3-Clause']
+			vcsUrl = 'https://github.com/kkorolyov/full-doc.git'
+			version {
+				name = project.version
+			}
+		}
+	}
+}
